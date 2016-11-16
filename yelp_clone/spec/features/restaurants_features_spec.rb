@@ -82,4 +82,16 @@ feature 'restaurants' do
 		end
 	end
 
+	context 'deleting a restaurant' do
+		let!(:medi){Restaurant.create(name: 'Mediterranean Grill')}
+		scenario 'lets user delete restuarant' do
+			visit '/restaurants'
+			click_link 'Mediterranean Grill'
+			click_link 'delete'
+			expect(page).not_to have_content 'Mediterranean Grill'
+			expect(page).to have_content 'Restaurant deleted successfully'
+		end
+	end
+
+
 end
