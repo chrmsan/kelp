@@ -93,5 +93,18 @@ feature 'restaurants' do
 		end
 	end
 
+	context 'user add review to restaurant' do
+		let!(:kfc){Restaurant.create(name: "KFC")}
+		scenario 'user adds a review to an existing restaurant' do
+			visit '/restaurants'
+			click_link 'KFC'
+			click_link 'review'
+			fill_in 'Thoughts', with: "Finger lickin' good"
+			fill_in :rating, with: 5
+			click_button 'Leave Review'
+			expect(current_path).to eq "/restaurants/#{kfc.id}"		
+			expect(page).to have_content("Finger lickin' good")
+		end
+	end
 
 end
