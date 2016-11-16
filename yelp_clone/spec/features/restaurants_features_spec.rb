@@ -68,20 +68,6 @@ feature 'restaurants' do
 		end
 	end
 
-		context 'user add rating to restaurant' do
-		scenario 'user adds a new restaurant and description' do
-			visit '/restaurants'
-			click_link 'Add a restaurant'
-			fill_in :name, with: "Pete's Wok"
-			fill_in :description, with: "Best Wok in the UK!"
-			fill_in :rating, with: 5
-			click_button 'Add Restaurant'
-			expect(page).to have_content "Pete's Wok 5/5"
-			click_link "Pete's Wok"
-			expect(page).to have_content "Rating: 5/5"
-		end
-	end
-
 	context 'deleting a restaurant' do
 		let!(:medi){Restaurant.create(name: 'Mediterranean Grill')}
 		scenario 'lets user delete restuarant' do
@@ -90,20 +76,6 @@ feature 'restaurants' do
 			click_link 'delete'
 			expect(page).not_to have_content 'Mediterranean Grill'
 			expect(page).to have_content 'Restaurant deleted successfully'
-		end
-	end
-
-	context 'user add review to restaurant' do
-		let!(:kfc){Restaurant.create(name: "KFC")}
-		scenario 'user adds a review to an existing restaurant' do
-			visit '/restaurants'
-			click_link 'KFC'
-			click_link 'review'
-			fill_in 'Thoughts', with: "Finger lickin' good"
-			fill_in :rating, with: 5
-			click_button 'Leave Review'
-			expect(current_path).to eq "/restaurants/#{kfc.id}"		
-			expect(page).to have_content("Finger lickin' good")
 		end
 	end
 

@@ -3,7 +3,5 @@
   <%= f.text_field :name %>
   <%= f.label :description, 'Restaurant description: '%>
   <%= f.text_area :description %>
-  <%= f.label :rating, 'Restaurant rating: '%>
-  <%= f.number_field :rating, in: 0..5 %>
   <%= f.submit 'Add Restaurant' %>
 <% end %>

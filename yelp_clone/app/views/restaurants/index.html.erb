@@ -1,0 +1,18 @@
+<% if @restaurants.any? %>
+	<% @restaurants.each do |restaurant| %>
+		<h2><%= link_to restaurant.name, restaurant_path(restaurant) %> <%=restaurant.rating%>/5</h2>
+		<%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
+		<p>
+      <% if restaurant.reviews.any? %>
+        <%= restaurant.reviews.each do |review| %>
+          <p><%= review.thoughts %></p>
+          <p><%= review.rating %></p>
+        <% end %>
+      <% end %>
+    </p>
+	<%end%>
+<% else %>
+<h1>No restaurants yet</h1>
+<% end %>
+
+<%= link_to 'Add a restaurant', new_restaurant_url %>
